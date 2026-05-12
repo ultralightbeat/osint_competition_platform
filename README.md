@@ -114,7 +114,6 @@ Required GitHub Secrets for deploy:
 ### Migration safety note (`is_creator`)
 
 To avoid repeated failure from schema drift, a dedicated migration `add_is_creator_to_users` was added with defensive logic:
-- if column is missing, it creates `users.is_creator` with safe default;
 - if column already exists (manual patch / partial migration), it normalizes `NULL` values and enforces expected constraints.
 
 This makes repeated `flask db upgrade` calls idempotent for this field and safe for CI/CD and VPS redeploys.
