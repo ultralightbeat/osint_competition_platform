@@ -81,7 +81,7 @@ Two workflows are configured:
 1. **CI** (`.github/workflows/ci.yml`) on `push`/`pull_request`:
    - Backend: installs dependencies, applies migrations to a clean PostgreSQL instance, checks that `users.is_creator` exists and is configured correctly (`NOT NULL` + server default), then runs syntax compilation.
    - Frontend: installs dependencies and runs production build.
-2. **CD** (`.github/workflows/deploy.yml`) after successful `CI` on `main` and manual run:
+2. **CD** (`.github/workflows/deploy.yml`) on `push` to `main` and manual run:
    - Connects to VPS via SSH.
    - Pulls the target branch.
    - Runs `flask db upgrade` before service restart.
@@ -110,3 +110,11 @@ Required GitHub Secrets for deploy:
    - `docker compose -f docker-compose.prod.yml ps`
    - `docker compose -f docker-compose.prod.yml logs -f backend`
    - Open your domain in browser.
+
+### Migration safety note (`is_creator`)
+
+To avoid repeated failure from schema drift, a dedicated migration `add_is_creator_to_users` was added with defensive logic:
+- if column is missing, it creates `users.is_creator` with safe default;
+- if column already exists (manual patch / partial migration), it normalizes `NULL` values and enforces expected constraints.
+
+This makes repeated `flask db upgrade` calls idempotent for this field and safe for CI/CD and VPS redeploys.
