@@ -1,0 +1,72 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 9999px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid transparent;
+}
+
+.compact {
+  font-size: 11px;
+  padding: 3px 8px;
+}
+
+.icon {
+  font-size: 14px;
+}
+
+.compact .icon {
+  font-size: 12px;
+}
+
+.student {
+  color: #67e8f9;
+  background: rgba(6, 182, 212, 0.16);
+  border-color: rgba(103, 232, 249, 0.35);
+}
+
+.chunin {
+  color: #fde68a;
+  background: rgba(245, 158, 11, 0.18);
+  border-color: rgba(253, 230, 138, 0.38);
+}
+
+.ninja {
+  color: #a5f3fc;
+  background: rgba(14, 165, 233, 0.18);
+  border-color: rgba(165, 243, 252, 0.36);
+}
+
+.samurai {
+  color: #fca5a5;
+  background: rgba(239, 68, 68, 0.16);
+  border-color: rgba(252, 165, 165, 0.36);
+}
+
+.ronin {
+  color: #f9a8d4;
+  background: rgba(236, 72, 153, 0.18);
+  border-color: rgba(249, 168, 212, 0.36);
+}
+
+.monk {
+  color: #bbf7d0;
+  background: rgba(34, 197, 94, 0.16);
+  border-color: rgba(187, 247, 208, 0.35);
+}
+
+.delighted {
+  color: #c4b5fd;
+  background: rgba(139, 92, 246, 0.18);
+  border-color: rgba(196, 181, 253, 0.38);
+}
+
+.archangel {
+  color: #fef08a;
+  background: linear-gradient(135deg, rgba(250, 204, 21, 0.24), rgba(253, 224, 71, 0.14));
+  border-color: rgba(250, 204, 21, 0.5);
+  box-shadow: 0 0 12px rgba(250, 204, 21, 0.18);
+}

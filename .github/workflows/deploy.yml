@@ -1,0 +1,43 @@
+name: CD
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Git branch to deploy"
+        required: true
+        default: "main"
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    name: Deploy to VPS
+    runs-on: ubuntu-latest
+    environment: production
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'workflow_run' &&
+       github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_branch == 'main')
+    env:
+      DEPLOY_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.ref || github.event.workflow_run.head_branch }}
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script_stop: true
+          script: |
+            set -euo pipefail
+            cd "${{ secrets.VPS_PROJECT_PATH }}"
+            git fetch --all --prune
+            git checkout "${{ env.DEPLOY_REF }}"
+            git pull --ff-only origin "${{ env.DEPLOY_REF }}"
+            docker compose -f docker-compose.prod.yml --env-file .env run --rm backend flask db upgrade
+            docker compose -f docker-compose.prod.yml --env-file .env up -d --build --remove-orphans
+            docker image prune -f

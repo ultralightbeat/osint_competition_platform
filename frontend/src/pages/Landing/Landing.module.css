@@ -1,0 +1,111 @@
+.page {
+  padding: var(--space-lg) 0 var(--space-2xl);
+}
+
+.hero {
+  margin-bottom: var(--space-xl);
+  background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.25), rgba(30, 41, 59, 0.8));
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-xl);
+}
+
+.heroContent {
+  max-width: 720px;
+}
+
+.title {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  margin-bottom: var(--space-sm);
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--space-lg);
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.section {
+  margin-bottom: var(--space-xl);
+}
+
+.sectionTitle {
+  margin-bottom: var(--space-md);
+}
+
+.stepsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-md);
+}
+
+.stepCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-lg);
+}
+
+.stepCard h3 {
+  margin-bottom: var(--space-xs);
+}
+
+.stepCard p {
+  color: var(--text-secondary);
+}
+
+.stepNumber {
+  display: inline-flex;
+  margin-bottom: var(--space-sm);
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.exampleCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-md);
+}
+
+.exampleRow {
+  display: grid;
+  grid-template-columns: 32px 1fr;
+  gap: var(--space-sm);
+  align-items: start;
+  padding: var(--space-sm);
+  border-radius: var(--border-radius);
+}
+
+.exampleRow + .exampleRow {
+  border-top: 1px solid var(--border-color);
+}
+
+.exampleIndex {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: rgba(99, 102, 241, 0.15);
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.exampleRow p {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 900px) {
+  .stepsGrid {
+    grid-template-columns: 1fr;
+  }
+}

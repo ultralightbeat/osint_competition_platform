@@ -1,0 +1,130 @@
+.page {
+  padding: var(--space-lg) 0;
+}
+
+.title {
+  margin: var(--space-md) 0 var(--space-lg);
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.statCard {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--space-md);
+}
+
+.statValue {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.statLabel {
+  margin-top: var(--space-xs);
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.usersBlock {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--space-md);
+}
+
+.usersHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-md);
+}
+
+.searchInput {
+  max-width: 360px;
+}
+
+.tableWrap {
+  overflow: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+}
+
+.table th,
+.table td {
+  border-bottom: 1px solid var(--border-color);
+  padding: var(--space-sm);
+  vertical-align: top;
+  text-align: left;
+}
+
+.table th {
+  white-space: nowrap;
+}
+
+.idCell {
+  min-width: 220px;
+  font-family: monospace;
+  font-size: 0.75rem;
+}
+
+.bioCell {
+  max-width: 240px;
+  word-break: break-word;
+}
+
+.deleteBtn {
+  min-width: 90px;
+}
+
+.empty {
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.loading,
+.loadingInline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading {
+  min-height: 60vh;
+}
+
+.loadingInline {
+  min-height: 120px;
+}
+
+.notAllowed {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: var(--space-xl);
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .usersHeader {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .searchInput {
+    max-width: 100%;
+  }
+}
