@@ -36,8 +36,9 @@ jobs:
             set -euo pipefail
             cd "${{ secrets.VPS_PROJECT_PATH }}"
             git fetch --all --prune
+            rm -f rabbitmq/enabled_plugins
             git checkout "${{ env.DEPLOY_REF }}"
             git pull --ff-only origin "${{ env.DEPLOY_REF }}"
-            docker compose -f docker-compose.prod.yml --env-file .env run --rm backend flask db upgrade
-            docker compose -f docker-compose.prod.yml --env-file .env up -d --build --remove-orphans
+            docker-compose -f docker-compose.prod.yml --env-file .env run --rm backend flask db upgrade
+            docker-compose -f docker-compose.prod.yml --env-file .env up -d --build --remove-orphans
             docker image prune -f
