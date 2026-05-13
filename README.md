@@ -111,4 +111,5 @@ Required GitHub Secrets for deploy:
    - `docker compose -f docker-compose.prod.yml logs -f backend`
    - Open your domain in browser.
 5. Test CI/CD
+6. New Test CI/CD
 
