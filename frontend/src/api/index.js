@@ -65,7 +65,8 @@ export const usersApi = {
   update: (data) => api.put('/users/me', data),
   getById: (id) => api.get(`/users/${id}`),
   adminDashboard: (search = '') => api.get('/users/admin/dashboard', { params: { search } }),
-  adminDeleteUser: (id) => api.delete(`/users/admin/users/${id}`)
+  adminDeleteUser: (id) => api.delete(`/users/admin/users/${id}`),
+  adminSetCreatorRole: (id, isCreator) => api.put(`/users/admin/users/${id}/creator`, { is_creator: isCreator })
 }
 
 export const tasksApi = {

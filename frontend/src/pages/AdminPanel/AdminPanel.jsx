@@ -20,6 +20,7 @@ export default function AdminPanel() {
   const [search, setSearch] = useState('')
   const [loading, setLoading] = useState(true)
   const [deletingId, setDeletingId] = useState(null)
+  const [creatorUpdatingId, setCreatorUpdatingId] = useState(null)
   const [stats, setStats] = useState(initialStats)
   const [users, setUsers] = useState([])
 
@@ -62,6 +63,19 @@ export default function AdminPanel() {
       alert(err?.response?.data?.error || 'Не удалось удалить пользователя')
     } finally {
       setDeletingId(null)
+    }
+  }
+
+  const handleCreatorToggle = async (userItem) => {
+    setCreatorUpdatingId(userItem.id)
+    try {
+      await usersApi.adminSetCreatorRole(userItem.id, !userItem.is_creator)
+      await loadData(search)
+    } catch (err) {
+      console.error(err)
+      alert(err?.response?.data?.error || 'Не удалось изменить роль создателя')
+    } finally {
+      setCreatorUpdatingId(null)
     }
   }
 
@@ -164,6 +178,17 @@ export default function AdminPanel() {
                           disabled={deletingId === u.id}
                         >
                           {deletingId === u.id ? '...' : 'Удалить'}
+                        </button>
+                        <button
+                          className={`btn btn-secondary ${styles.creatorBtn}`}
+                          onClick={() => handleCreatorToggle(u)}
+                          disabled={creatorUpdatingId === u.id}
+                        >
+                          {creatorUpdatingId === u.id
+                            ? '...'
+                            : u.is_creator
+                              ? 'Снять Creator'
+                              : 'Выдать Creator'}
                         </button>
                       </td>
                       <td>{u.username}</td>

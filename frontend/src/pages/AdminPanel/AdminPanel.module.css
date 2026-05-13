@@ -88,6 +88,11 @@
   min-width: 90px;
 }
 
+.creatorBtn {
+  min-width: 120px;
+  margin-top: var(--space-xs);
+}
+
 .empty {
   text-align: center;
   color: var(--text-muted);

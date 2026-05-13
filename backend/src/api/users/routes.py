@@ -165,3 +165,23 @@ def admin_delete_user(id):
     db.session.delete(user)
     db.session.commit()
     return jsonify({"status": "deleted"})
+
+
+@users_bp.put("/admin/users/<id>/creator")
+@jwt_required()
+def admin_set_creator_role(id):
+    _, error_response = _require_admin()
+    if error_response:
+        return error_response
+
+    user = User.query.get(id)
+    if not user:
+        return jsonify({"error": "Not found"}), 404
+
+    data = request.get_json() or {}
+    if "is_creator" not in data or not isinstance(data.get("is_creator"), bool):
+        return jsonify({"error": "is_creator must be a boolean"}), 400
+
+    user.is_creator = data["is_creator"]
+    db.session.commit()
+    return jsonify(UserSchema().dump(user))
