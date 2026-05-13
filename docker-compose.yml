@@ -4,7 +4,6 @@ services:
     container_name: osint_nginx
     ports:
       - "80:80"
-      - "443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/default.conf.template:/etc/nginx/templates/default.conf.template
